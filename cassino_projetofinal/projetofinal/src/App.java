@@ -13,7 +13,6 @@ public class App {
         int opcao = -1;
 
         System.out.println("---------- CASSINO DA SORTE ----------");
-        System.out.println("Login inicial: kemilly | Senha inicial: 123");
 
         while (opcao != 0) {
             System.out.println("\n---------- MENU INICIAL ----------");
@@ -193,7 +192,7 @@ public class App {
             return;
         }
 
-        double premio = jogo.jogar(valor); // polimorfismo
+        double premio = jogo.jogar(valor);
         String resultado = "Perdeu";
 
         if (premio > 0) {
