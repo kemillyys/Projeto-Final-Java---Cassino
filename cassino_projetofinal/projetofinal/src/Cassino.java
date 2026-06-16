@@ -42,7 +42,7 @@ public class Cassino {
         this.apostas = apostas;
     }
 
-    public void carregarDados() {
+    public void carregarDados() { // leitura dos jogadores e apostas salvas
         carregarJogadores();
         carregarApostas();
     }
@@ -62,7 +62,7 @@ public class Cassino {
             }
             br.close();
         } catch (Exception e) {
-            Jogador padrao = new Jogador("Kemilly", "000.000.000-00", "kemilly", "123", "111", "222", 100.0);
+            Jogador padrao = new Jogador("Kemilly", "000.000.000-00", "kemilly", "123", "111", "222", 50.0);
             jogadores.add(padrao);
             salvarTodosJogadores();
         }
@@ -180,21 +180,19 @@ public class Cassino {
         double totalApostado = 0;
         double totalPremios = 0;
 
-        System.out.println("\n---------- RELATORIO DO CASSINO ----------");
-        System.out.println("Quantidade de jogadores: " + jogadores.size());
-        System.out.println("Quantidade de jogos: " + jogos.size());
-        System.out.println("Quantidade de apostas: " + apostas.size());
-
         for (int i = 0; i < apostas.size(); i++) {
-            totalApostado = totalApostado + apostas.get(i).getValorApostado();
-            totalPremios = totalPremios + apostas.get(i).getValorPremio();
+            totalApostado += apostas.get(i).getValorApostado();
+            totalPremios += apostas.get(i).getValorPremio();
         }
 
+        System.out.println("\n========== RELATORIO GERAL DO CASSINO ==========");
+        System.out.println("Quantidade de jogadores cadastrados: " + jogadores.size());
+        System.out.println("Quantidade de jogos cadastrados: " + jogos.size());
+        System.out.println("Quantidade de apostas realizadas: " + apostas.size());
         System.out.println("Total apostado: R$ " + totalApostado);
         System.out.println("Total pago em premios: R$ " + totalPremios);
         System.out.println("Lucro do cassino: R$ " + (totalApostado - totalPremios));
-        System.out.println("\nApostas registradas:");
-        mostrarApostas();
-        System.out.println("------------------------------------------\n");
+
+        System.out.println("===============================================\n");
     }
 }
