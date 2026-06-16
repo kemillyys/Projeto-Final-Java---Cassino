@@ -1,9 +1,5 @@
 CASSINO DA SORTE 💰💵
 
-Login inicial:
-login: kemilly
-senha: 123
-
 Organizacao do sistema:
 - App.java: main, com menu inicial, login e menu do jogador
 - Pessoa.java: classe base
