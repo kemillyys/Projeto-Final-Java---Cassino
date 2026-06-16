@@ -110,10 +110,11 @@ public class App {
             System.out.println("Jogador logado: " + jogadorLogado.getNome());
             System.out.println("Saldo: R$ " + jogadorLogado.getCarteira().getSaldo());
             System.out.println("1 - Depositar saldo");
-            System.out.println("2 - Jogar roleta");
-            System.out.println("3 - Jogar caca niquel");
-            System.out.println("4 - Consultar apostas cadastradas");
-            System.out.println("5 - Relatorio geral");
+            System.out.println("2 - Sacar saldo");
+            System.out.println("3 - Jogar roleta");
+            System.out.println("4 - Jogar caca niquel");
+            System.out.println("5 - Consultar apostas cadastradas");
+            System.out.println("6 - Relatorio geral");
             System.out.println("0 - Sair da conta");
             System.out.print("Escolha: ");
 
@@ -122,23 +123,44 @@ public class App {
             if (opcao == 1) {
                 depositarSaldo(jogadorLogado);
             } else if (opcao == 2) {
-                fazerAposta(jogadorLogado, cassino.buscarJogoPorNome("Roleta"));
+                sacarSaldo(jogadorLogado);
             } else if (opcao == 3) {
-                fazerAposta(jogadorLogado, cassino.buscarJogoPorNome("Caca Niquel"));
+                fazerAposta(jogadorLogado, cassino.buscarJogoPorNome("Roleta"));
             } else if (opcao == 4) {
-                cassino.mostrarApostas();
+                fazerAposta(jogadorLogado, cassino.buscarJogoPorNome("Caca Niquel"));
             } else if (opcao == 5) {
+                cassino.mostrarApostas();
+            } else if (opcao == 6) {
                 cassino.gerarRelatorio();
             } else if (opcao == 0) {
                 cassino.salvarTodosJogadores();
                 cassino.salvarTodasApostas();
-                System.out.println("Voce saiu da conta.");
+                System.out.println("Saindo da conta...");
             } else {
                 System.out.println("Opcao invalida.");
             }
         }
     }
 
+    public static void sacarSaldo(Jogador jogador) {
+        System.out.println("Digite o valor do saque:");
+        double valor = lerDouble();
+
+        if (valor <= 0) {
+            System.out.println("Valor invalido.");
+        } else {
+            boolean conseguiuSacar = jogador.getCarteira().sacar(valor);
+
+            if (conseguiuSacar) {
+                cassino.salvarTodosJogadores();
+                System.out.println("Saque realizado com sucesso.");
+                System.out.println("Saldo atual: R$ " + jogador.getCarteira().getSaldo());
+            } else {
+                System.out.println("Saldo insuficiente para saque.");
+            }
+        }
+    }
+    
     public static void cadastrarJogador() {
         System.out.println("\n---------- CADASTRO DE USUARIO ----------");
         System.out.print("Nome: ");
